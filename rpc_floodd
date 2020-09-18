@@ -35,7 +35,7 @@ while True:
 
         channel = connection.channel()
         channel.exchange_declare(exchange=rabbitmq_exchange, exchange_type='topic')
-        result = channel.queue_declare(rabbitmq_exchange + '_control')
+        result = channel.queue_declare(rabbitmq_exchange + '_control', durable=True)
         queue_name = result.method.queue
         print(queue_name)
         channel.queue_bind(exchange=rabbitmq_exchange, queue=queue_name, routing_key='control')
